@@ -1,7 +1,7 @@
 import React from 'react';
 import './ImageLinkInput.css';
 
-function ImageLinkInput() {
+function ImageLinkInput( {onSearchChange, onButtonSubmit} ) {
   return (
     <div>
       <div className='header'>
@@ -14,8 +14,8 @@ function ImageLinkInput() {
       </div>
       <div className='centerDiv'>
         <div className='form centerDiv w-50 pa4 br3 shadow-5'>
-          <input className='f4 pa2 w-70 f6' type='text' placeholder='Enter an image URL' />
-          <button className='f4 link ph3 pv2 white bg-transparent'>
+          <input className='f4 pa2 w-70 f6' type='text' placeholder='Enter an image URL' onChange={onSearchChange}/>
+          <button className='f4 link ph3 pv2 white bg-transparent' onClick={onButtonSubmit}>
             Detect
           </button>
         </div>
