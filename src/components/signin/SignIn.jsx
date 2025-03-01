@@ -41,7 +41,7 @@ function SignIn({ onRouteChange, loadUser }) {
                         id="sign_up"
                         className="ba b--transparent ph0 mh0"
                     >
-                        <legend className="f2 fw6 ph0 mh0">
+                        <legend className="f2 fw6 ph0 mh0 white">
                             Sign In
                         </legend>
                         <div className="mt3">
