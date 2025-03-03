@@ -37,7 +37,7 @@ function App() {
 
   const onButtonSubmit = () => {
     setImgURL(input);
-    fetch('https://omnisolveapi.onrender.com/facerec',
+    fetch('http://localhost:4000/facerec',
       {
         method: 'POST',
         headers: {
