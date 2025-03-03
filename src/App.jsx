@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navigation from './components/navigation/Nav';
 import Logo from './components/logo/Logo.jsx';
 import Rank from './components/rank/Rank.jsx';
@@ -8,38 +8,6 @@ import Register from './components/register/Register.jsx';
 import ImageLinkInput from './components/imageLinkInput/ImageLinkInput.jsx';
 import FaceRegonition from './components/faceRegonition/FaceRecognition.jsx';
 import ParticlesBg from 'particles-bg';
-
-const returnResponse = (imgURL) => {
-  const PAT = '0783a563f0ba40e5aa5b0affe9191cd9';
-  const USER_ID = '7n3wochcy90p';
-  const APP_ID = 'test';
-
-  const raw = JSON.stringify({
-    "user_app_id": {
-      "user_id": USER_ID,
-      "app_id": APP_ID
-    },
-    "inputs": [
-      {
-        "data": {
-          "image": {
-            "url": imgURL
-          }
-        }
-      }
-    ]
-  });
-
-  return {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Key ' + PAT
-    },
-    body: raw
-  };
-}
-
 
 function App() {
   const [input, setInput] = useState('');
@@ -69,33 +37,85 @@ function App() {
 
   const onButtonSubmit = () => {
     setImgURL(input);
-    fetch("https://cors-anywhere.herokuapp.com/https://api.clarifai.com/v2/models/face-detection/outputs", returnResponse(input))
+    fetch('http://localhost:4000/facerec',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          input: input,
+        })
+      })
       .then(response => response.json())
-      .then(result => displayFaceBox(calculateFaceLocation(result)))
+      .then(data => {
+        const parsedCoordinates = parseCoordinatesResponse(data);
+        console.log(parsedCoordinates)
+        const boxData = calculateFaceLocation(parsedCoordinates);
+        console.log(boxData)
+        setBox(boxData);
+      })
       .catch(error => console.log('error', error));
   }
 
+  // Function to parse the API response and remove unwanted JSON syntax
+  const parseCoordinatesResponse = (responseText) => {
+    // Remove the ```json and ``` markers if they exist
+    let cleanedText = responseText;
+    if (responseText.includes('```')) {
+      cleanedText = responseText.replace(/```json|```/g, '').trim();
+    }
+
+    try {
+      // Parse the JSON
+      return JSON.parse(cleanedText);
+    } catch (error) {
+      console.error('Error parsing coordinates:', error);
+      return [];
+    }
+  };
+
+  // Calculate function that works with normalized [top_row, left_col, bottom_row, right_col] format
   const calculateFaceLocation = (data) => {
-    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputImage');
     const width = Number(image.width);
     const height = Number(image.height);
 
-    return {
-      leftColumn: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightColumn: width - (clarifaiFace.right_col * width),
-      bottomRow: height - (clarifaiFace.bottom_row * height)
-    }
-  }
+    // Process each person's coordinates
+    const boxes = {};
 
-  const displayFaceBox = (box) => {
-    setBox(box);
-  }
+    data.forEach((person) => {
+      const personKey = Object.keys(person)[0]; // e.g., "person 1"
+      const coords = person[personKey]; // [top_row, left_col, bottom_row, right_col]
+
+      if (coords && coords.length === 4) {
+        const [top_row, left_col, bottom_row, right_col] = coords;
+
+        boxes[personKey] = {
+          topRow: top_row * height,
+          leftColumn: left_col * width,
+          bottomRow: height - (bottom_row * height),
+          rightColumn: width - (right_col * width)
+        };
+      }
+    });
+
+    return boxes;
+  };
 
   const onRouteChange = (route) => {
     if (route === 'signout') {
       setIsSignnedIn(false);
+      // Reset all user data
+      setUser({
+        id: '',
+        name: '',
+        email: '',
+        joined: new Date()
+      });
+      setInput('');
+      setImgURL('');
+      setBox({});
     } else if (route === 'home') {
       setIsSignnedIn(true);
     }
