@@ -18,7 +18,7 @@ function Register({ onRouteChange, loadUser }) {
     }
 
     const onSubmitRegister = () => {
-        fetch('http://localhost:4000/register',
+        fetch('https://omnisolveapi.onrender.com/register',
             {
                 method: 'POST',
                 headers: {
