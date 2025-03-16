@@ -7,7 +7,7 @@ import SignIn from './components/signin/SignIn.jsx';
 import Register from './components/register/Register.jsx';
 import ImageLinkInput from './components/imageLinkInput/ImageLinkInput.jsx';
 import FaceRegonition from './components/faceRegonition/FaceRecognition.jsx';
-import ParticlesBg from 'particles-bg';
+// import ParticlesBg from 'particles-bg';
 
 function App() {
   const [input, setInput] = useState('');
@@ -125,7 +125,6 @@ function App() {
   return (
     <div className="App">
       <Navigation isSignnedIn={isSignnedIn} onRouteChange={onRouteChange} />
-      <ParticlesBg type="cobweb" bg={true} color="#ffffff" opacity={0.4} />
       {route === 'home' ?
         <div>
           <Logo />
