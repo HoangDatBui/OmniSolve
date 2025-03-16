@@ -1,13 +1,12 @@
 import React from 'react';
-import './Rank.css';
 
 function Rank() {
     return (
         <div>
-            <div className='white f4 rank-text'>
+            <div className="text-white text-lg rank-text">
                 {'Hey, your current rank is '}
             </div>
-            <div className='white f2 rank-number'>
+            <div className="text-white text-2xl rank-number">
                 {'#1'}
             </div>
         </div>

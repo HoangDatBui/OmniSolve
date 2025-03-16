@@ -6,8 +6,8 @@ function FaceRecognition({ imgURL, box }) {
   const hasBoxes = box && Object.keys(box).length > 0;
 
   return (
-    <div className="centerDiv ma">
-      <div className='absolute mt2'>
+    <div className="flex justify-center m-auto">
+      <div className="relative mt-2">
         {imgURL && <img id='inputImage' src={imgURL} alt="Face detection" width={500} height={'auto'} />}
         
         {hasBoxes && Object.keys(box).map((person, index) => (

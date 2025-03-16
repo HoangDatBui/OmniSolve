@@ -40,68 +40,68 @@ function Register({ onRouteChange, loadUser }) {
     }
 
     return (
-        <article className="br3 ba b--black-10 mv4 w-30 shadow-5 mw6 center">
-            <main className="pa4 black-80">
+        <article className="rounded-md border border-black/10 my-4 w-full max-w-md mx-auto shadow-md">
+            <main className="p-4 text-black">
                 <div className="measure">
                     <fieldset
                         id="sign_up"
-                        className="ba b--transparent ph0 mh0"
+                        className="border-0 p-0 m-0"
                     >
-                        <legend className="f2 fw6 ph0 mh0">
+                        <legend className="text-2xl font-semibold p-0 m-0">
                             Register
                         </legend>
-                        <div className="mt3">
+                        <div className="mt-3">
                             <label
-                                className="db fw6 lh-copy f6"
+                                className="block font-semibold leading-copy text-sm"
                                 htmlFor="name"
                             >
                                 Name
                             </label>
                             <input
                                 onChange={onRegisterNameChanged}
-                                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                className="p-2 w-full border border-gray-300 bg-transparent hover:bg-black hover:text-white transition"
                                 type="text"
                                 name="name"
                                 id="name"
                             />
                         </div>
-                        <div className="mt3">
+                        <div className="mt-3">
                             <label
-                                className="db fw6 lh-copy f6"
+                                className="block font-semibold leading-copy text-sm"
                                 htmlFor="email-address"
                             >
                                 Email
                             </label>
                             <input
                                 onChange={onRegisterMailChanged}
-                                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                className="p-2 w-full border border-gray-300 bg-transparent hover:bg-black hover:text-white transition"
                                 type="email"
                                 name="email-address"
                                 id="email-address"
                             />
                         </div>
-                        <div className="mv3">
+                        <div className="my-3">
                             <label
-                                className="db fw6 lh-copy f6"
+                                className="block font-semibold leading-copy text-sm"
                                 htmlFor="password"
                             >
                                 Password
                             </label>
                             <input
                                 onChange={onRegisterPasswordChanged}
-                                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                className="font-bold p-2 w-full border border-gray-300 bg-transparent hover:bg-black hover:text-white transition"
                                 type="password"
                                 name="password"
                                 id="password"
                             />
                         </div>
-                        <label className="pa0 ma0 lh-copy f6 pointer">
+                        <label className="p-0 m-0 leading-copy text-sm cursor-pointer">
                         </label>
                     </fieldset>
                     <div className="">
                         <input
                             onClick={() => onSubmitRegister()}
-                            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                            className="font-bold px-3 py-2 border border-black bg-transparent hover:scale-105 cursor-pointer text-sm inline-block transition"
                             type="submit"
                             value="Register"
                         />
