@@ -17,10 +17,6 @@ function Register({ onRouteChange, loadUser }) {
         setRegisterName(event.target.value);
     }
 
-    const onLoginAsGuest = () => {
-        onRouteChange('home');
-    }
-
     const onSubmitRegister = () => {
         fetch('https://omnisolveapi.onrender.com/register',
             {
