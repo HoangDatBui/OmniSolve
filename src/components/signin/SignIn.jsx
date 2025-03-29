@@ -69,7 +69,7 @@ function SignIn({ onRouteChange, loadUser }) {
                 className="absolute left-1/2 top-1/2 w-[400px] h-[520px] -translate-x-1/2 -translate-y-1/2 rounded-[10px] border-2 border-white/10 shadow-[0_0_40px_rgba(8,7,16,0.6)] p-[50px_35px] bg-[rgba(255,255,255,0.13)]"
                 style={{ backdropFilter: 'blur(10px)' }}
             >
-                <h3 className="text-[32px] font-medium leading-[42px] text-center">LOGIN Here</h3>
+                <h3 className="text-[32px] font-medium leading-[42px] text-center">Login Here</h3>
 
                 <label htmlFor="username" className="block mt-[30px] text-[16px] font-medium">
                     Username

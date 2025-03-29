@@ -105,6 +105,7 @@ function App() {
 
   const onRouteChange = (route) => {
     if (route === 'signout') {
+      onRouteChange('signin')
       setIsSignnedIn(false);
       // Reset all user data
       setUser({
